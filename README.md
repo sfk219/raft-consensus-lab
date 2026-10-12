@@ -1,17 +1,19 @@
 # Raft Consensus Lab (Go)
 
-A deterministic educational simulator of **Raft-inspired distributed coordination** built as an independent portfolio project.
+A runnable **educational Raft-inspired cluster simulator**, independently written as a portfolio demonstration. Models synchronous leader elections, majority quorum, state replication, leader failure and recovery. **Not** a complete Raft implementation or production distributed database.
 
-**Features:** simplified leader election, majority-quorum checks, replicated key/value state, simulated leader failure and recovery, and tests for stale candidates.
-
-**Tech stack:** Go 1.22+, distributed systems, fault tolerance, automated testing.
-
-## Run locally
+## Run and test
 ```bash
+go test ./...
 go run ./cmd/demo
-go test ./... -v
 ```
 
-> This is a learning-oriented simulator, not a production Raft implementation. It does not reproduce employer or client code.
+**Code:** `raftsim/cluster.go`, `raftsim/cluster_test.go`, `cmd/demo/main.go`.
 
-[Return to my GitHub profile](https://github.com/sfk219)
+## Features
+- Elect leader only with a majority and a sufficiently up-to-date log.
+- Replicate key/value writes among reachable nodes.
+- Refuse writes if the majority is unavailable.
+- Recover an offline node by synchronizing committed data.
+
+**Tech:** Go, distributed systems, consensus concepts, testing. No client/employer code.
